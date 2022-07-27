@@ -28,7 +28,6 @@ export const Task = ({
           name="checked"
         />
         <span
-          className="checkbox-custom"
           onClick={() => onArchiveTask(id)}
           id={`archiveTask-${id}`}
           aria-label={`archiveTask-${id}`}
