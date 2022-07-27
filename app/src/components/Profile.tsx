@@ -1,6 +1,6 @@
 import React from 'react'
 import { User } from './User'
-// import img from
+import styled from 'styled-components'
 
 export interface ProfileProps {
   user: User
@@ -21,29 +21,22 @@ const Other = () => {
   )
 }
 
-export interface ProfileImageProps {
-  url: string
-  radius?: number
-}
-
-const ProfileImage = ({ url, radius = 200 }: ProfileImageProps) => (
-  <img
-    src={url}
-    alt="profile"
-    style={{
-      width: radius,
-      height: radius,
-      borderRadius: radius / 2,
-      objectFit: 'cover',
-    }}
-  />
-)
+const Circle = styled.img<{ radius: string }>`
+  height: ${(p) => p.radius || '200px'};
+  width: ${(p) => p.radius || '200px'};
+  border-radius: 50%;
+  object-fit: cover;
+`
 
 export const Profile = ({ user, isSelf }: ProfileProps) => {
   const { pid, nickname, avatarUrl } = user
   return (
     <div className="profile">
-      <ProfileImage url={avatarUrl || 'http://placekitten.com/200/200'} />
+      <Circle
+        src={avatarUrl || 'http://placekitten.com/200/200'}
+        radius="200px"
+        alt="profile"
+      />
       <div className="profile-info">
         <h2 className="name">{nickname || pid}</h2>
         <p className="pid">{pid}</p>
