@@ -18,9 +18,9 @@ export const MatchResultNumber = (user: string, result: MatchResult[]) => {
     draw = 0
 
   const leftWon = (result: MatchResult) =>
-    result.left == user && result.winner === 'LEFT'
+    result.left === user && result.winner === 'LEFT'
   const rightWon = (result: MatchResult) =>
-    result.right == user && result.winner === 'RIGHT'
+    result.right === user && result.winner === 'RIGHT'
 
   result.forEach(item => {
     if (item.winner === 'DRAW') {

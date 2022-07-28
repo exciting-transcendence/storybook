@@ -1,36 +1,21 @@
 import React from 'react'
 import { MatchResult, MatchResultNumber, User } from './User'
-import styled from 'styled-components'
-import { Button } from './Button'
-import { Circle } from './Circle'
+import { Avatar, Button } from '@chatscope/chat-ui-kit-react'
+import { Container, AvatarContainer, Rank, Name } from './Profile.styles'
 
 const Myself = () => {
-  return <Button label="change profile image" />
+  return <Button border={true}>change profile image</Button>
 }
 
 const Other = () => {
   return (
     <div>
-      <Button label="send message" />
-      <Button label="add to favorite" />
-      <Button label="block" />
+      <Button border={true}>send message</Button>
+      <Button border={true}>add to favorite</Button>
+      <Button border={true}>block</Button>
     </div>
   )
 }
-
-const ProfileCircle = styled(Circle)`
-  /* display: block; */
-  /* margin: 0 auto; */
-`
-
-const Container = styled.div`
-  width: 20rem;
-  height: 30rem;
-  background-color: beige;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
 
 interface StatProps {
   pid: string
@@ -59,21 +44,28 @@ export const Stat = ({ pid, history }: StatProps) => {
 export interface ProfileProps {
   user: User
   isSelf: boolean
-  history: MatchResult[]
 }
 
-export const Profile = ({ user, isSelf, history = [] }: ProfileProps) => {
-  const { pid, nickname, avatarUrl } = user
+export const Profile = ({ user, isSelf }: ProfileProps) => {
+  const { pid, nickname, avatarUrl, history } = user
   return (
     <Container>
-      <ProfileCircle
-        src={avatarUrl || 'http://placekitten.com/200/200'}
-        radius="50%"
-        alt="profile"
-      />
+      <AvatarContainer>
+        <Avatar
+          src={avatarUrl || 'http://placekitten.com/200/200'}
+          name={nickname}
+          size={'fluid'}
+          status={'available'}
+        />
+      </AvatarContainer>
       <div>
-        <h2>{nickname || pid}</h2>
-        <h4>{pid}</h4>
+        <Name>
+          <h2>{nickname || pid}</h2>
+          <h4>{pid}</h4>
+        </Name>
+        <h4>
+          Rank: <Rank>{'B'}</Rank>
+        </h4>
         <Stat pid={user.pid} history={history} />
         {isSelf ? <Myself /> : <Other />}
       </div>

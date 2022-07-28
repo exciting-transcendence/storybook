@@ -25,29 +25,37 @@ const Template: ComponentStory<typeof Profile> = args => <Profile {...args} />
 export const DefaultMe = Template.bind({})
 DefaultMe.args = {
   user: {
-    pid: 'johndoe',
-    nickname: 'John the Doe',
-  } as User,
+    pid: 'intraID',
+    nickname: 'Example User',
+    friends: [],
+    blocks: [],
+    history: [],
+  },
   isSelf: true,
 }
 
 export const WithHistory = Template.bind({})
 WithHistory.args = {
   user: {
-    ...DefaultMe.args.user,
+    ...(DefaultMe.args.user as User),
     history: [
       {
-        left: 'johndoe',
-        right: 'janedoe',
+        left: 'example',
+        right: 'other',
         winner: 'LEFT',
       },
       {
-        left: 'johndoe',
-        right: 'janedoe',
+        left: 'example',
+        right: 'other',
         winner: 'RIGHT',
       },
+      {
+        left: 'example',
+        right: 'other',
+        winner: 'DRAW',
+      },
     ],
-  } as User,
+  },
 }
 
 export const DefaultOther = Template.bind({})
